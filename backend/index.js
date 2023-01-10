@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 
 // import local file
 const corsConfig = require("./src/configs/cors.config");
+const accountApi = require("./src/apis/account.api");
 
 const app = express();
 
@@ -30,3 +31,6 @@ app.use(bodyParser.json());
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");
 });
+// ================== Apis ==================
+const BASE_URL = "/api";
+app.use(`${BASE_URL}/account`, accountApi);
