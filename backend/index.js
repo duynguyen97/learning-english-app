@@ -2,6 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 // import local file
 const corsConfig = require("./src/configs/cors.config");
@@ -23,7 +24,8 @@ mongoose.connection.on("connected", () => {
 app.use(logger("dev"));
 app.use(cookieParser());
 app.use(cors(corsConfig));
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 // ================== Listening ... ==================
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");
