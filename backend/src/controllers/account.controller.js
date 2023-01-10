@@ -3,8 +3,11 @@ const {
   isExistAccount,
   createAccount,
   createUser,
+  findAccount,
 } = require("../services/account.service");
-const { ACCOUNT_TYPES } = require("../constant");
+const bcrypt = require("bcryptjs");
+const jwtConfig = require("../configs/jwt.config");
+const { ACCOUNT_TYPES, KEYS, COOKIE_EXPIRES_TIME } = require("../constant");
 
 exports.postRegisterAccount = async (req, res) => {
   try {
@@ -41,6 +44,45 @@ exports.postRegisterAccount = async (req, res) => {
     return res.status(200).json({ message: "Tạo tài khoản thành công" });
   } catch (error) {
     console.error("POST REGISTER ACCOUNT ERROR: ", error);
+    return res.status(503).json({ message: "Lỗi dịch vụ, thử lại sau" });
+  }
+};
+
+exports.postLogin = async (req, res) => {
+  try {
+    const email = req.body.email?.toLowerCase();
+    const { password } = req.body;
+
+    // check account existence
+    const account = await findAccount(email);
+    if (!account) {
+      return res.status(400).json({ message: "Tài khoản không tồn tại" });
+    }
+
+    // verify password
+    const isMatch = await bcrypt.compare(password, account.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Mật khẩu không đúng" });
+    }
+
+    // set cookie with jwt
+    const token = await jwtConfig.generateToken(
+      { accountId: account._id },
+      process.env.JWT_SECRET_KEY || "dynonary-serect"
+    );
+    res.cookie(KEYS.JWT_TOKEN, token, {
+      httpOnly: true,
+      expires: new Date(Date.now() + COOKIE_EXPIRES_TIME),
+    });
+
+    return res.status(200).json({
+      message: "success",
+      key: KEYS.JWT_TOKEN,
+      token,
+      expires: new Date(Date.now() + COOKIE_EXPIRES_TIME),
+    });
+  } catch (error) {
+    console.error("POST LOGIN ERROR: ", error);
     return res.status(503).json({ message: "Lỗi dịch vụ, thử lại sau" });
   }
 };
