@@ -1,8 +1,12 @@
 const express = require("express");
-
-const app = express();
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const cors = require("cors");
+
+// import local file
+const corsConfig = require("./src/configs/cors.config");
+
+const app = express();
 
 // set environment variables
 require("dotenv").config();
@@ -18,6 +22,7 @@ mongoose.connection.on("connected", () => {
 // ================== config ==================
 app.use(logger("dev"));
 app.use(cookieParser());
+app.use(cors(corsConfig));
 
 // ================== Listening ... ==================
 app.listen(3000, () => {
