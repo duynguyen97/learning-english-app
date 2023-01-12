@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 // import local file
 const corsConfig = require("./src/configs/cors.config");
 const accountApi = require("./src/apis/account.api");
+const wordApi = require("./src/apis/word.api");
 
 const app = express();
 
@@ -34,3 +35,4 @@ app.listen(3000, () => {
 // ================== Apis ==================
 const BASE_URL = "/api";
 app.use(`${BASE_URL}/account`, accountApi);
+app.use(`${BASE_URL}/word`, wordApi);
