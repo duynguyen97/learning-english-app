@@ -10,5 +10,10 @@ accountApi.get(
   passportConfig.jwtAuthentication,
   accountController.getUserProfile
 );
+accountApi.get(
+  "/user-info",
+  passportConfig.jwtAuthentication,
+  accountController.getUserInfo
+);
 
 module.exports = accountApi;
