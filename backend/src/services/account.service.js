@@ -46,3 +46,14 @@ exports.createUser = async (accountId, username, name, avt = "") => {
     throw error;
   }
 };
+
+exports.getProfile = async (accountId = "") => {
+  try {
+    const account = await AccountModel.findById(accountId).select(
+      "email createdDate"
+    );
+    return account;
+  } catch (error) {
+    throw error;
+  }
+};

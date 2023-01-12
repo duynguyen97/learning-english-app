@@ -4,6 +4,7 @@ const {
   createAccount,
   createUser,
   findAccount,
+  getProfile,
 } = require("../services/account.service");
 const bcrypt = require("bcryptjs");
 const jwtConfig = require("../configs/jwt.config");
@@ -68,7 +69,7 @@ exports.postLogin = async (req, res) => {
     // set cookie with jwt
     const token = await jwtConfig.generateToken(
       { accountId: account._id },
-      process.env.JWT_SECRET_KEY || "dynonary-serect"
+      process.env.JWT_SECRET_KEY || "app-serect"
     );
     res.cookie(KEYS.JWT_TOKEN, token, {
       httpOnly: true,
@@ -94,5 +95,26 @@ exports.postLogout = async (req, res) => {
   } catch (error) {
     console.error("POST LOG OUT ERROR: ", error);
     return res.status(503).json({ message: "Lỗi dịch vụ, thử lại sau" });
+  }
+};
+
+exports.getUserProfile = async (req, res) => {
+  try {
+    if (!req.user) {
+      return res.status(403).json({ message: "failed" });
+    }
+    const { accountId } = req.user;
+
+    const userInfo = await getProfile(accountId);
+    if (!userInfo) {
+      return res.status(403).json({ message: "failed" });
+    }
+
+    return res
+      .status(200)
+      .json({ email: userInfo.email, createdDate: userInfo.createdDate });
+  } catch (error) {
+    console.error("GET USER PROFILE ERROR: ", error);
+    return res.status(500).json({ message: "Lỗi dịch vụ, thử lại sau" });
   }
 };
