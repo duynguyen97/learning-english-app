@@ -1,17 +1,17 @@
 module.exports = {
   extends: ['react-app', 'prettier'],
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   plugins: ['react', 'prettier'],
   parserOptions: {
     ecmaVersion: 2016,
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   env: {
     es6: true,
-    node: true
+    node: true,
   },
   globals: {
     localStorage: true,
@@ -20,7 +20,7 @@ module.exports = {
     window: true,
     document: true,
     Raven: true,
-    ENV: true
+    ENV: true,
   },
   rules: {
     'react/prop-types': 'off',
@@ -28,8 +28,8 @@ module.exports = {
     'react/sort-comp': [
       1,
       {
-        order: ['type-annotations', 'static-methods', 'lifecycle', 'everything-else', 'render']
-      }
-    ]
-  }
-}
+        order: ['type-annotations', 'static-methods', 'lifecycle', 'everything-else', 'render'],
+      },
+    ],
+  },
+};
