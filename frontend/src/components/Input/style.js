@@ -1,7 +1,8 @@
-import { TextField } from '@mui/material';
 import styled from '@emotion/styled';
+import { TextField } from '@material-ui/core';
 
 const StyledInput = styled(TextField)({
+  width: '100%',
   '& .MuiInputBase-root': {
     backgroundColor: 'var(--bg-color-accent)',
     borderRadius: 'var(--border-radius)',

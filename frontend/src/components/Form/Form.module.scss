@@ -1,0 +1,29 @@
+.form-wrapper {
+  padding: 2.4rem 3.6rem;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+  width: 35rem;
+  background-color: var(--bg-color-sec);
+  & > * {
+    margin-top: 1.2rem !important;
+    margin-bottom: 1.2rem !important;
+  }
+}
+.title {
+  font-size: 2.4rem;
+  color: var(--text-color);
+}
+.labelIcon {
+  font-size: 3.6rem !important;
+  color: var(--text-color);
+}
+.has-account {
+  margin-top: 2.4rem;
+  font-size: 1.6rem;
+  text-align: center;
+  font-weight: 500;
+  color: var(--grey);
+}
+.account-link {
+  color: var(--accent-color);
+}
