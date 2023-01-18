@@ -27,3 +27,14 @@
 .account-link {
   color: var(--accent-color);
 }
+
+.forgotPw {
+  color: var(--title-color);
+  opacity: 0.65;
+  font-weight: 500;
+  font-size: 1.4rem;
+  text-align: right;
+  &:hover {
+    opacity: 1;
+  }
+}

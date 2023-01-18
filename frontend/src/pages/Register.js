@@ -8,14 +8,7 @@ import { ROUTES } from 'constant';
 
 const RegisterPage = () => {
   return (
-    <Grid
-      container
-      spacing={0}
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      style={{ minHeight: '100vh' }}
-    >
+    <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" className="h-100vh">
       <form className={`${formStyles['form-wrapper']} flex-col`} autoComplete="off">
         <div className="flex-col">
           <h1 className={`${formStyles['title']} t-center`}>Tạo tài khoản</h1>
