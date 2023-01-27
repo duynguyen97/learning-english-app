@@ -1,10 +1,10 @@
-import { Button, Grid } from '@material-ui/core';
 import { AccountCircle } from '@mui/icons-material';
 import formStyles from '../components/Form/Form.module.scss';
 import Input from 'components/Input';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'constant';
+import { Button, Grid } from '@mui/material';
 
 const RegisterPage = () => {
   return (
