@@ -6,7 +6,7 @@ const corsConfig = {
   // Configures the Access-Control-Allow-Origin
   origin:
     app.get("env") !== "production"
-      ? "http://localhost:8000"
+      ? "http://localhost:8888"
       : process.env.CORS_ORIGIN,
 
   // Configures the Access-Control-Allow-Methods
