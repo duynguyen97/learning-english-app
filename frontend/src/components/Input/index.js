@@ -3,22 +3,25 @@ import PropTypes from 'prop-types';
 import StyledInput from './style';
 
 const Input = (props) => {
-  const { endAdornment, error, inputProps, ...propRest } = props;
+  const { endAdornment, error, inputProps, errorMsg, ...propRest } = props;
 
   return (
-    <StyledInput
-      error={error}
-      InputProps={{
-        disableUnderline: true,
-        endAdornment,
-      }}
-      inputProps={inputProps}
-      InputLabelProps={{
-        shrink: true,
-      }}
-      variant="filled"
-      {...propRest}
-    />
+    <div>
+      <StyledInput
+        error={error}
+        InputProps={{
+          disableUnderline: true,
+          endAdornment,
+        }}
+        inputProps={inputProps}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        variant="filled"
+        {...propRest}
+      />
+      {errorMsg && <p className="text-error">{errorMsg?.message}</p>}
+    </div>
   );
 };
 

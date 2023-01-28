@@ -18,3 +18,11 @@ export const MAX = {
   NAME_LEN: 50,
   USERNAME_LEN: 110,
 };
+
+export const MIN = {
+  PASSWORD_LEN: 6,
+};
+
+export const REGEX = {
+  NAME: /^[^\d~`!@#$%^&*\(\)\\\|\.,\?\/\-\+\=\_]+$/gi,
+};
