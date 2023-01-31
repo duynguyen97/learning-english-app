@@ -1,0 +1,48 @@
+.navWrapper {
+  padding-bottom: var(--nav-height);
+}
+
+.nav {
+  background-color: var(--bg-color-sec);
+  height: var(--nav-height);
+  box-shadow: var(--box-shadow);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.logo {
+  margin-right: 0.8rem;
+  width: auto !important;
+  border-radius: 50%;
+}
+
+.imgSize {
+  height: 4.8rem;
+  width: 4.8rem;
+}
+
+.iconSize {
+  font-size: 2.4rem !important;
+  color: var(--label-color);
+}
+
+.control {
+  margin-left: auto;
+}
+
+.searchIcon {
+  font-size: iconSize;
+  color: var(--label-color);
+}
+
+.loginBtn {
+  height: 3.7rem;
+  min-width: 12rem;
+}
+
+.loginLabel {
+  font-size: 1.4rem;
+}
