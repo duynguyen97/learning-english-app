@@ -1,0 +1,32 @@
+.root {
+  border: solid 1px var(--secondary-color);
+  padding: 0.4rem 0.8rem;
+  width: max-content;
+  border-radius: 25px;
+
+  transition: all 0.25s;
+
+  &.active {
+    background-color: var(--secondary-color);
+  }
+
+  &:hover,
+  &:active {
+    filter: brightness(0.85);
+  }
+}
+
+.icon {
+  border-radius: 50%;
+  width: 2.8rem;
+  height: 2.8rem;
+  margin-right: 0.5rem;
+}
+
+.text {
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 1.4rem;
+  padding-left: 0.4rem;
+  padding-right: 0.8rem;
+}
