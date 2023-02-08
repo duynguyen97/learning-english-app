@@ -1,10 +1,10 @@
 import Layout from 'components/Layout';
 import { ROUTES } from 'constant';
 import React from 'react';
-import flashcardIcon from '../assets/icons/flashcard.png';
-import dictionaryIcon from '../assets/icons/dictionary.png';
-import favoriteIcon from '../assets/icons/favorite.png';
-import editIcon from '../assets/icons/edit.png';
+import flashcardIcon from 'assets/icons/flashcard.png';
+import dictionaryIcon from 'assets/icons/dictionary.png';
+import favoriteIcon from 'assets/icons/favorite.png';
+import editIcon from 'assets/icons/edit.png';
 import { Grid } from '@mui/material';
 import FeatureBox from 'components/FeatureBox';
 

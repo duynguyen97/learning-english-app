@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { AccountCircle } from '@mui/icons-material';
-import formStyles from '../components/Form/Form.module.scss';
+import formStyles from 'components/Form/Form.module.scss';
 import Input from 'components/Input';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';

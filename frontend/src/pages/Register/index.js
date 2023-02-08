@@ -1,5 +1,5 @@
 import { AccountCircle } from '@mui/icons-material';
-import formStyles from '../components/Form/Form.module.scss';
+import formStyles from 'components/Form/Form.module.scss';
 import Input from 'components/Input';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
