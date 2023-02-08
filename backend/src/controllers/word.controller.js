@@ -38,3 +38,16 @@ exports.postWord = async (req, res) => {
     return res.status(503).json({ message: "Lỗi dịch vụ, thử lại sau" });
   }
 };
+
+exports.getCheckWordExistence = async (req, res) => {
+  try {
+    const { word, type } = req.query;
+    const { accountId } = req.user;
+
+    const isExist = await isExistWord(word, type, accountId);
+    return res.status(200).json({ isExist });
+  } catch (error) {
+    console.error("GET CHECK WORD EXIST ERROR: ", error);
+    return res.status(200).json({ isExist: false });
+  }
+};
