@@ -1,21 +1,18 @@
-import Button from '@material-ui/core/Button';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Skeleton from '@material-ui/lab/Skeleton';
+import { Cloud, Delete } from '@mui/icons-material';
+import { Button, Skeleton } from '@mui/material';
 import Compressor from 'compressorjs';
 import { MAX } from 'constant';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setMessage } from 'redux/slices/message.slice';
-import useStyle from './style';
+import uploadButtonStyles from './UploadButton.module.scss';
 
 function checkFile(file) {
   if (!file) return { status: false, message: 'File không hợp lệ' };
   const { type, size } = file;
 
-  if (type.split('/')[0] !== 'image')
-    return { status: false, message: 'File gửi lên phải là một ảnh' };
+  if (type.split('/')[0] !== 'image') return { status: false, message: 'File gửi lên phải là một ảnh' };
 
   if (size / 1024 ** 2 > MAX.IMG_SIZE)
     return {
@@ -27,7 +24,6 @@ function checkFile(file) {
 }
 
 function UploadButton({ title, className, onChange, resetFlag }) {
-  const classes = useStyle();
   const dispatch = useDispatch();
   const [state, setState] = useState({ status: 0, data: null });
 
@@ -100,7 +96,7 @@ function UploadButton({ title, className, onChange, resetFlag }) {
       {state.status === 0 && (
         <>
           <input
-            className={classes.input}
+            className={uploadButtonStyles['input']}
             accept="image/*"
             id="button-file"
             htmlFor="contained-button-file"
@@ -109,11 +105,12 @@ function UploadButton({ title, className, onChange, resetFlag }) {
           />
           <label htmlFor="button-file">
             <Button
-              className={`${classes.btn} w-100 h-100`}
+              className={`${uploadButtonStyles['btn']} w-100 h-100`}
               variant="contained"
               color="primary"
               component="span"
-              endIcon={<CloudUploadIcon />}>
+              endIcon={<Cloud />}
+            >
               {title}
             </Button>
           </label>
@@ -121,16 +118,14 @@ function UploadButton({ title, className, onChange, resetFlag }) {
       )}
 
       {/* loading */}
-      {state.status === 1 && (
-        <Skeleton variant="rect" classes={{ root: classes.skeleton }} />
-      )}
+      {state.status === 1 && <Skeleton variant="rect" classes={{ root: uploadButtonStyles['skeleton'] }} />}
 
       {/* done */}
       {state.status === 2 && (
-        <div className={`${classes.review} w-100 h-100 flex-center-between`}>
-          <img src={state.data?.imgSrc} alt="photo" />
+        <div className={`${uploadButtonStyles['review']} w-100 h-100 flex-center-between`}>
+          <img src={state.data?.imgSrc} alt="photo-upload" />
           <p>{`${state.data?.fileName} (${state.data?.fileSize} MB)`} </p>
-          <DeleteIcon className="icon cur-pointer" onClick={onRemoveFile} />
+          <Delete className="icon cur-pointer" onClick={onRemoveFile} />
         </div>
       )}
     </div>

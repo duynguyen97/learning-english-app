@@ -1,8 +1,8 @@
 .button {
   background-color: var(--bg-color-accent) !important;
   box-shadow: none !important;
-  border: solid 1px var(--border-color);
-  color: var(--label-color);
+  border: solid 1px var(--border-color) !important;
+  color: var(--label-color) !important;
   text-transform: capitalize;
   min-height: 5.6rem;
 

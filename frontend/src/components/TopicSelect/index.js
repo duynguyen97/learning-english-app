@@ -4,7 +4,7 @@ import Tag from 'components/Tag';
 import { TOPICS } from 'constant/topics';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
-import topicStyles from './TopicSelect.moudle.scss';
+import topicStyles from './TopicSelect.module.scss';
 
 const TopicSelect = ({ onChange, resetFlag, buttonTitle, topicList, buttonWrapper, tagsWrapper }) => {
   const [visible, setVisible] = useState(false);

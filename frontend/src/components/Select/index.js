@@ -11,7 +11,7 @@ const SelectCustom = (props) => {
     if (!resetFlag) return;
     // reset value if parent component reset, except first render
     setValue(options[0]?.value);
-  }, [resetFlag]);
+  }, [resetFlag, options]);
 
   return (
     <>
@@ -21,7 +21,7 @@ const SelectCustom = (props) => {
         </InputLabel>
         <Select
           classes={{
-            root: selectStyles['selectRoot'],
+            select: selectStyles['selectRoot'],
             icon: selectStyles['selectIcon'],
           }}
           MenuProps={{ classes: { paper: selectStyles['selectMenu'] } }}

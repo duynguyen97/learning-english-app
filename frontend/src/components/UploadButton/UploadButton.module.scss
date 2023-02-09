@@ -1,0 +1,54 @@
+.input {
+  display: none;
+}
+
+.btn {
+  min-height: 5.6rem;
+  background-color: var(--bg-color-accent) !important;
+  box-shadow: none !important;
+  border: solid 1px var(--border-color) !important;
+  color: var(--label-color) !important;
+
+  text-transform: capitalize;
+  &:hover,
+  &:active {
+    opacity: 0.85;
+  }
+}
+
+.skeleton {
+  height: 100% !important;
+  background-color: var(--bg-color-accent) !important;
+}
+
+.review {
+  background-color: var(--bg-color-accent) !important;
+  border: solid 1px var(--border-color) !important;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--sm-border-radius) !important;
+
+  & img {
+    height: 5.4rem;
+    width: 5.4rem;
+  }
+
+  & p {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 0.4rem;
+  }
+
+  & .icon {
+    color: var(--label-color) !important;
+    font-size: 2.4rem;
+
+    transition: all 0.25s;
+    &:hover,
+    &:active {
+      transform: scale(1.1);
+    }
+  }
+}
