@@ -30,6 +30,7 @@ const HomePage = () => {
       title: 'Thêm từ vựng',
       imgUrl: editIcon,
       subTitle: 'Bạn có thể thêm từ mới, sửa lỗi sai',
+      to: ROUTES.WORD,
     },
   ];
   return (
