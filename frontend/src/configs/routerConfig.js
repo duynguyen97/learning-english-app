@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Navigate, Outlet, Route, Routes } from 'react-router';
 const { ROUTES } = require('../constant');
 const HomePage = React.lazy(() => import('pages/Home'));
 const LoginPage = React.lazy(() => import('pages/Login'));
@@ -25,13 +25,28 @@ const routes = [
 ];
 
 const renderRoutes = (routes, isAuth = false) => {
-  return routes.map((route, index) => {
-    const { path, component, isProtect } = route;
-    const loginComponent = () => <LoginPage />;
-    const componentRender = !isProtect ? component : isAuth ? component : loginComponent;
+  const protectRoutes = routes.filter((route) => route.isProtect);
+  const publicRoutes = routes.filter((route) => !route.isProtect);
 
-    return <Route path={path} key={index} element={componentRender} />;
-  });
+  const PrivateRoutes = () => {
+    return isAuth ? <Outlet /> : <Navigate to="/login" />;
+  };
+
+  return (
+    <Routes>
+      <Route element={<PrivateRoutes />}>
+        {protectRoutes.map((route, index) => {
+          const { path, component } = route;
+          return <Route path={path} key={index} element={component} />;
+        })}
+      </Route>
+      {publicRoutes.map((route, index) => {
+        const { path, component } = route;
+        return <Route path={path} key={index} element={component} />;
+      })}
+      <Route path="*" element={<>NotFoundPage</>} />
+    </Routes>
+  );
 };
 
 const routersConfig = {
