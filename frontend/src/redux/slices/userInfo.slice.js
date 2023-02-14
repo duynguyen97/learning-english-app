@@ -17,6 +17,7 @@ const userInfoSlice = createSlice({
   name: 'userInfo',
   initialState: {
     isAuth: false,
+    accountId: '',
     name: '',
     username: '',
     avt: '',
@@ -39,12 +40,12 @@ const userInfoSlice = createSlice({
   },
   extraReducers: {
     [getUserInfo.fulfilled]: (state, action) => {
-      const { username, name, avt, favoriteList } = action.payload;
+      const { username, name, avt, favoriteList, accountId } = action.payload;
       if (!username || username === '') {
         state.isAuth = false;
         return;
       }
-      return { isAuth: true, username, name, avt, favoriteList };
+      return { isAuth: true, username, name, avt, favoriteList, accountId };
     },
   },
 });

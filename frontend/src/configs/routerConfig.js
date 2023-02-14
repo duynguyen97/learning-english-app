@@ -4,6 +4,7 @@ const { ROUTES } = require('../constant');
 const HomePage = React.lazy(() => import('pages/Home'));
 const LoginPage = React.lazy(() => import('pages/Login'));
 const RegisterPage = React.lazy(() => import('pages/Register'));
+const WordPage = React.lazy(() => import('pages/Word'));
 
 // routes for app
 const routes = [
@@ -21,6 +22,11 @@ const routes = [
     path: ROUTES.REGISTER,
     isProtect: false,
     component: <RegisterPage />,
+  },
+  {
+    path: ROUTES.WORD,
+    isProtect: false,
+    component: <WordPage />,
   },
 ];
 

@@ -11,7 +11,7 @@ import { MAX, WORD_LEVELS, WORD_SPECIALTY, WORD_TYPES } from 'constant';
 import { analysisExample, debounce } from 'helper';
 import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setMessage } from 'redux/slices/message.slice';
 import * as yup from 'yup';
 import wordStyles from './Word.module.scss';
@@ -22,6 +22,7 @@ const TagsWrapper = (props) => <Grid {...props} item xs={12} />;
 const Word = () => {
   const [resetFlag, setResetFlag] = useState(0);
   const dispatch = useDispatch();
+  const { accountId } = useSelector((state) => state.userInfo);
   const [submitting, setSubmitting] = useState(false);
   let delayTimer;
   const inputRef = useRef(null);
@@ -122,6 +123,7 @@ const Word = () => {
         synonyms: synonymArr,
         antonyms: antonymArr,
         word,
+        accountId,
         phonetic: phonetic.replaceAll('/', ''),
       };
 
@@ -136,6 +138,7 @@ const Word = () => {
           }),
         );
         setSubmitting(false);
+        onResetForm();
       }
     } catch (error) {
       const message = error.response?.data?.message || 'Thêm từ mới không thành công, thử lại';
