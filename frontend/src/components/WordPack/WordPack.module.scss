@@ -1,0 +1,19 @@
+.dialogPaper {
+  background-color: var(--bg-color-sec);
+}
+
+.title {
+  & > * {
+    color: var(--title-color);
+  }
+}
+
+.content {
+  & * {
+    color: var(--text-color);
+  }
+}
+
+.breakLine {
+  border-color: var(--border-color);
+}
