@@ -1,3 +1,4 @@
+const { convertPackInfoToQueryStr } = require("../helper");
 const WordModel = require("../models/word.model");
 
 exports.createNewWord = async (wordInfo) => {
@@ -26,6 +27,38 @@ exports.isExistWord = async (word = "", type = "", accountId) => {
         type: type,
       }).count()) > 0
     );
+  } catch (error) {
+    throw error;
+  }
+};
+
+exports.getWordPack = async (
+  accountId,
+  packInfo = {},
+  skip = 0,
+  limit = 500,
+  expandQuery = null
+) => {
+  try {
+    let query = convertPackInfoToQueryStr(packInfo);
+    // add expand query
+    if (expandQuery && typeof expandQuery === "object") {
+      Object.assign(query, expandQuery);
+    }
+
+    const packList = await WordModel.aggregate([
+      {
+        $match: { accountId, ...query },
+      },
+      {
+        $facet: {
+          data: [{ $match: query }, { $skip: skip }, { $limit: limit }],
+          pagination: [{ $count: "total" }],
+        },
+      },
+    ]);
+
+    return packList;
   } catch (error) {
     throw error;
   }
