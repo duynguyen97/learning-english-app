@@ -73,7 +73,7 @@ exports.getWordPack = async (req, res, next) => {
       { $and: [{ picture: { $ne: null } }, { picture: { $ne: "" } }] }
     );
 
-    return res.status(200).json({ packList });
+    return res.status(200).json(packList);
   } catch (error) {
     console.error("GET WORD PACK ERROR: ", error);
     return res.status(503).json({ message: "Lỗi dịch vụ, thử lại sau" });

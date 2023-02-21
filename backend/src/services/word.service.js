@@ -46,7 +46,7 @@ exports.getWordPack = async (
       Object.assign(query, expandQuery);
     }
 
-    const packList = await WordModel.aggregate([
+    const [packList] = await WordModel.aggregate([
       {
         $match: { accountId, ...query },
       },
