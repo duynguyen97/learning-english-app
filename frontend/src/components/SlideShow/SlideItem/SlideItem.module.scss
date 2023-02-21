@@ -1,0 +1,101 @@
+.root {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 45% 55%;
+
+  height: 100%;
+  width: 100%;
+  margin: 2.2rem auto 0;
+
+  box-shadow: var(--box-shadow);
+  background-color: var(--bg-color-sec);
+  border-radius: 8;
+  overflow: hidden;
+
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: 4fr 6fr;
+    grid-template-rows: 1fr;
+
+    width: 100%;
+    margin: 0;
+    max-height: 576px;
+    border: 0 64px 0 64px;
+    position: relative;
+
+    &::after {
+      content: '';
+      width: 32;
+      height: 32;
+      background-color: var(--bg-color-main);
+      position: absolute;
+      right: 2.4rem;
+      top: 2.4rem;
+      border-radius: 50%;
+      box-shadow: 1px -1px 8px 0 rgba(0, 0, 0, 0.25) inset;
+    }
+  }
+}
+
+.picture {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-color: var(--bg-color-accent);
+}
+
+.content {
+  padding: 1.2rem 2.4rem;
+  margin: -0.6rem 0;
+
+  & > * {
+    margin: 0.6rem 0;
+    text-align: center;
+  }
+}
+
+.mean {
+  font-size: 2.4rem;
+  color: var(--primary-color);
+  font-weight: bold;
+  text-transform: capitalize;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 3rem;
+  }
+}
+
+.word {
+  font-size: 2.2rem;
+  letter-spacing: 0.75px;
+  color: var(--text-color);
+  text-transform: capitalize;
+  @media only screen and (max-width: 768px) {
+    font-size: 2.8rem;
+  }
+}
+
+.type {
+  font-size: 1.6rem;
+  color: var(--label-color);
+  @media only screen and (max-width: 768px) {
+    font-size: 1.8rem;
+  }
+}
+
+.phonetic {
+  font-size: 1.8rem;
+  color: var(--phonetic-color);
+  letter-spacing: 1px;
+  @media only screen and (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+.example {
+  font-size: 1.7rem;
+  color: var(--text-color);
+  line-height: 1.5;
+  @media only screen and (max-width: 768px) {
+    font-size: 1.9rem;
+  }
+}

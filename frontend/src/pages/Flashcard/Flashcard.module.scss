@@ -1,0 +1,29 @@
+.iconWrap {
+  margin: 0 -0.8rem;
+  display: flex;
+}
+
+.icon {
+  color: var(--text-color);
+  font-size: 2.4rem;
+  margin: 0 0.8rem;
+  cursor: pointer;
+
+  &.active {
+    color: var(--secondary-color);
+  }
+}
+.title {
+  color: var(--title-color);
+  font-size: 2.4rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.75px;
+  font-weight: 500;
+}
+.break {
+  width: 100%;
+  height: 1px;
+  margin: 0.8rem 0;
+  background-color: var(--border-color);
+}

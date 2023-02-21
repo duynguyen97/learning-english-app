@@ -5,6 +5,7 @@ const HomePage = React.lazy(() => import('pages/Home'));
 const LoginPage = React.lazy(() => import('pages/Login'));
 const RegisterPage = React.lazy(() => import('pages/Register'));
 const WordPage = React.lazy(() => import('pages/Word'));
+const FlashcardPage = React.lazy(() => import('pages/Flashcard'));
 
 // routes for app
 const routes = [
@@ -25,8 +26,13 @@ const routes = [
   },
   {
     path: ROUTES.WORD,
-    isProtect: false,
+    isProtect: true,
     component: <WordPage />,
+  },
+  {
+    path: ROUTES.FLASHCARD,
+    isProtect: true,
+    component: <FlashcardPage />,
   },
 ];
 

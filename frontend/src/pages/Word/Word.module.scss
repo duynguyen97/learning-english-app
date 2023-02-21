@@ -32,3 +32,10 @@
     filter: brightness(0.85);
   }
 }
+
+.break {
+  width: 100%;
+  height: 1px;
+  margin: 0.8rem 0;
+  background-color: var(--border-color);
+}

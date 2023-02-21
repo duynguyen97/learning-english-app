@@ -124,3 +124,10 @@ export const WORD_SPECIALTY = [
   { value: '17', label: 'Xây dựng (Construction Industry)' },
   { value: '15', label: 'Xã hội học (Sociology)' },
 ];
+
+export const DEFAULTS = {
+  VOICE_URI: 'Google US English',
+  VOICE_SPEED: 1,
+  VOICE_VOLUME: 1,
+  IMAGE_SRC: 'https://res.cloudinary.com/dynonary/image/upload/v1625136714/dynonary/default-image.png',
+};
