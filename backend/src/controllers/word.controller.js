@@ -64,13 +64,11 @@ exports.getWordPack = async (req, res, next) => {
     const pageInt = parseInt(page),
       perPageInt = parseInt(perPage);
     const skip = (pageInt - 1) * perPageInt;
-
     const packList = await serviceGetWordPack(
       accountId,
       JSON.parse(packInfo),
       skip,
-      perPageInt,
-      { $and: [{ picture: { $ne: null } }, { picture: { $ne: "" } }] }
+      perPageInt
     );
 
     return res.status(200).json(packList);

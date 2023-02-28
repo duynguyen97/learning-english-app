@@ -36,6 +36,7 @@ exports.getWordPack = async (
   accountId,
   packInfo = {},
   skip = 0,
+<<<<<<< HEAD
   limit = 500,
   expandQuery = null
 ) => {
@@ -45,6 +46,12 @@ exports.getWordPack = async (
     if (expandQuery && typeof expandQuery === "object") {
       Object.assign(query, expandQuery);
     }
+=======
+  limit = 500
+) => {
+  try {
+    let query = convertPackInfoToQueryStr(packInfo);
+>>>>>>> 36ea71a ('deploy')
 
     const [packList] = await WordModel.aggregate([
       {

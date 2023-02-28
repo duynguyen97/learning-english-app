@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const path = require("path");
 
 // import local file
 const corsConfig = require("./src/configs/cors.config");
@@ -21,19 +22,12 @@ const dev = app.get("env") !== "production";
 
 if (!dev) {
   app.disable("x-powered-by");
-  app.use(morgan("common"));
+  app.use(logger("common"));
   app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "/src/build", "index.html"));
   });
-
-  // Auto wake up heroku
-  // app.get('/apis/wakeup-heroku', (req, res) => res.send('ok'));
-  // const timer = 25 * 60 * 1000; // 25 minutes
-  // setInterval(() => {
-  //   https.get('https://dynonary.herokuapp.com/apis/wakeup-heroku');
-  // }, timer);
 } else {
-  app.use(morgan("dev"));
+  app.use(logger("dev"));
 }
 
 // ================== Connect mongodb with mongoose ==================
@@ -46,16 +40,19 @@ mongoose.connection.on("connected", () => {
 });
 
 // ================== config ==================
-app.use(logger("dev"));
 app.use(cookieParser());
 app.use(cors(corsConfig));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // ================== Listening ... ==================
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Server is listening on port 3000");
 });
 // ================== Apis ==================
 const BASE_URL = "/api";
 app.use(`${BASE_URL}/account`, accountApi);
 app.use(`${BASE_URL}/word`, wordApi);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/src/build", "index.html"));
+});
