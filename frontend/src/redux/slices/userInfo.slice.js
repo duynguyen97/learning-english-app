@@ -22,6 +22,7 @@ const userInfoSlice = createSlice({
     username: '',
     avt: '',
     favoriteList: [],
+    loading: true,
   },
   reducers: {
     setAddFavorites(state, action) {
@@ -45,7 +46,10 @@ const userInfoSlice = createSlice({
         state.isAuth = false;
         return;
       }
-      return { isAuth: true, username, name, avt, favoriteList, accountId };
+      return { isAuth: true, username, name, avt, favoriteList, accountId, loading: false };
+    },
+    [getUserInfo.rejected]: () => {
+      return { isAuth: false, loading: false };
     },
   },
 });

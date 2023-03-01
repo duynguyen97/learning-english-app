@@ -4,6 +4,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
+const { MAX } = require("./src/constant");
 
 // import local file
 const corsConfig = require("./src/configs/cors.config");
@@ -40,6 +41,8 @@ mongoose.connection.on("connected", () => {
 });
 
 // ================== config ==================
+app.use(express.json({ limit: MAX.SIZE_JSON_REQUEST }));
+app.use(express.urlencoded({ limit: MAX.SIZE_JSON_REQUEST }));
 app.use(cookieParser());
 app.use(cors(corsConfig));
 app.use(bodyParser.urlencoded({ extended: false }));

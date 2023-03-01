@@ -10,13 +10,11 @@ const { routes, renderRoutes } = routerConfig;
 
 function App() {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
-  const { isAuth } = useSelector((state) => state.userInfo);
+  const { isAuth, loading } = useSelector((state) => state.userInfo);
 
   // get user info
   useEffect(() => {
     dispatch(getUserInfo());
-    setLoading(false);
     return () => {};
   }, []);
 

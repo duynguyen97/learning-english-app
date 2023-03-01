@@ -124,8 +124,10 @@ const Word = () => {
         synonyms: synonymArr,
         antonyms: antonymArr,
         word,
-        accountId,
+        topics: topics.current,
+        picture: picture.current,
         phonetic: phonetic.replaceAll('/', ''),
+        accountId,
       };
 
       const apiRes = await wordApi.postWord(dataSend);
