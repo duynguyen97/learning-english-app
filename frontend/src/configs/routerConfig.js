@@ -3,6 +3,7 @@ import { Navigate, Outlet, Route, Routes } from 'react-router';
 const { ROUTES } = require('../constant');
 const HomePage = React.lazy(() => import('pages/Home'));
 const LoginPage = React.lazy(() => import('pages/Login'));
+const LogoutPage = React.lazy(() => import('pages/Logout'));
 const RegisterPage = React.lazy(() => import('pages/Register'));
 const WordPage = React.lazy(() => import('pages/Word'));
 const FlashcardPage = React.lazy(() => import('pages/Flashcard'));
@@ -18,6 +19,11 @@ const routes = [
     path: ROUTES.LOGIN,
     isProtect: false,
     component: <LoginPage />,
+  },
+  {
+    path: ROUTES.LOGOUT,
+    isProtect: false,
+    component: <LogoutPage />,
   },
   {
     path: ROUTES.REGISTER,

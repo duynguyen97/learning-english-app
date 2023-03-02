@@ -11,7 +11,6 @@ const SettingMenu = ({ anchorEl, onClose }) => {
       classes={{ paper: SettingMenuStyles['root'] }}
       anchorEl={anchorEl}
       disableScrollLock={true}
-      getContentAnchorEl={null}
       onClose={onClose}
       open={Boolean(anchorEl)}
       anchorOrigin={{

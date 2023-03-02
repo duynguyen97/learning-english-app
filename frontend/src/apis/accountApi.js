@@ -12,6 +12,9 @@ const accountApi = {
   getUserInfo: () => {
     return axiosClient.get(`${URL}/user-info`);
   },
+  postLogout: () => {
+    return axiosClient.post(`${URL}/logout`);
+  },
 };
 
 export default accountApi;
