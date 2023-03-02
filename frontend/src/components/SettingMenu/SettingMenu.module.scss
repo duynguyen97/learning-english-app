@@ -1,0 +1,28 @@
+.root {
+  width: 35rem;
+  background-color: var(--bg-color-sec);
+  box-shadow: var(--box-shadow);
+}
+
+.menuItem {
+  display: flex !important;
+  padding: 1rem 1.8rem !important;
+  max-width: 100%;
+  &:hover,
+  &:active {
+    background-color: var(--hover-color) !important;
+  }
+}
+
+.icon {
+  color: var(--grey) !important;
+}
+
+.text {
+  margin-left: 1.6rem;
+  text-align: justify;
+  white-space: pre-wrap;
+  max-width: 100%;
+  font-weight: 500;
+  font-size: 1.8rem;
+}

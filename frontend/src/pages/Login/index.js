@@ -117,6 +117,12 @@ const LoginPage = () => {
           Đăng nhập
         </Button>
       </form>
+      <div className={formStyles['has-account']}>
+        Bạn chưa có tài khoản?&nbsp;
+        <Link to={ROUTES.REGISTER} className={formStyles['account-link']}>
+          Đăng ký
+        </Link>
+      </div>
     </Grid>
   );
 };

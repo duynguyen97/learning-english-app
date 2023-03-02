@@ -6,9 +6,13 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import headerStyles from './Header.module.scss';
+import SettingMenu from 'components/SettingMenu';
 
 function Header() {
   const { avt, isAuth } = useSelector((state) => state.userInfo);
+  const [anchorMenu, setAnchorMenu] = useState(null);
+  const onOpenMenu = (e) => setAnchorMenu(e.currentTarget);
+  const onCloseMenu = () => setAnchorMenu(null);
 
   return (
     <div className={`${headerStyles['navWrapper']} w-100vw`} id="dynoNav">
@@ -22,14 +26,20 @@ function Header() {
           {/* control, setting */}
           <div className={`${headerStyles['control']} flex-center--ver`}>
             {isAuth ? (
-              <Avatar className={`${headerStyles['imgSize']} cur-pointer`} alt="Username" src={avt || defaultUserImg} />
+              <Avatar
+                onClick={onOpenMenu}
+                onMouseEnter={onOpenMenu}
+                className={`${headerStyles['imgSize']} cur-pointer`}
+                alt="Username"
+                src={avt || defaultUserImg}
+              />
             ) : (
               <Link to={ROUTES.LOGIN}>
                 <Button
                   className="_btn _btn-primary"
                   classes={{
-                    root: headerStyles.loginBtn,
-                    label: headerStyles.loginLabel,
+                    root: headerStyles['loginBtn'],
+                    label: headerStyles['loginLabel'],
                   }}
                   variant="contained"
                   color="primary"
@@ -39,7 +49,7 @@ function Header() {
                 </Button>
               </Link>
             )}
-            {/* TODO: Setting menu */}
+            <SettingMenu anchorEl={anchorMenu} onClose={onCloseMenu} />
           </div>
         </div>
       </div>
