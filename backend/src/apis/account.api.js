@@ -10,6 +10,11 @@ accountApi.get(
   passportConfig.jwtAuthentication,
   accountController.getUserProfile
 );
+accountApi.put(
+  "/update-profile",
+  passportConfig.jwtAuthentication,
+  accountController.putUpdateProfile
+);
 accountApi.get(
   "/user-info",
   passportConfig.jwtAuthentication,

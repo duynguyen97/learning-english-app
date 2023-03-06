@@ -5,6 +5,7 @@ const {
   createUser,
   findAccount,
   getProfile,
+  updateProfile,
 } = require("../services/account.service");
 const bcrypt = require("bcryptjs");
 const jwtConfig = require("../configs/jwt.config");
@@ -129,5 +130,25 @@ exports.getUserInfo = async (req, res) => {
   } catch (error) {
     console.error("GET USER INFO ERROR: ", error);
     return res.status(401).json({ message: "Failed" });
+  }
+};
+
+exports.putUpdateProfile = async (req, res, next) => {
+  try {
+    const { user } = req;
+    const { name, username } = req.body;
+    if (!Boolean(user)) {
+      return res.status(400).json({ message: "Cập nhập thất bại" });
+    }
+
+    const update = await updateProfile(user.username, name, username);
+    if (!update.status) {
+      return res.status(400).json({ message: update.message });
+    }
+
+    return res.status(200).json({ message: "success" });
+  } catch (error) {
+    console.error("PUT UPDATE PROFILE ERROR: ", error);
+    return res.status(500).json({ message: "Lỗi dịch vụ, thử lại sau" });
   }
 };

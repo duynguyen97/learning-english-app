@@ -57,3 +57,30 @@ exports.getProfile = async (accountId = "") => {
     throw error;
   }
 };
+
+exports.updateProfile = async (
+  username = "",
+  newName = "",
+  newUsername = ""
+) => {
+  try {
+    if (username.toLowerCase() !== newUsername.toLowerCase()) {
+      const isExist = await UserModel.exists({ username: newUsername });
+      if (isExist) {
+        return { status: false, message: "username đã được sử dụng" };
+      }
+    }
+
+    const isUpdated = await UserModel.updateOne(
+      { username },
+      { name: newName, username: newUsername }
+    );
+
+    if (isUpdated.n && isUpdated.ok)
+      return { status: true, message: "success" };
+
+    return false;
+  } catch (error) {
+    throw error;
+  }
+};
