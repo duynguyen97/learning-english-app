@@ -15,6 +15,15 @@ const accountApi = {
   postLogout: () => {
     return axiosClient.post(`${URL}/logout`);
   },
+  getUserProfile: () => {
+    return axiosClient.get(`${URL}/user-profile`);
+  },
+  putUpdateAvt: (avtSrc = '') => {
+    return axiosClient.put(`${URL}/update-avt`, { avtSrc });
+  },
+  putUpdateProfile: (name = '', username = '') => {
+    return axiosClient.put(`${URL}/update-profile`, { name, username });
+  },
 };
 
 export default accountApi;

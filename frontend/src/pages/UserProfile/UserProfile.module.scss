@@ -1,0 +1,76 @@
+.wrap {
+  min-height: calc(100vh - 7.2rem);
+}
+
+.root {
+  background-color: var(--bg-color-sec);
+  padding: 3.6rem 5.6rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  box-shadow: var(--box-shadow);
+}
+
+.avtWrap {
+  width: 15rem;
+  height: 15rem;
+  position: relative;
+}
+
+.avt {
+  border-radius: 50%;
+}
+
+.cameraIconWrap {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 4.2rem;
+  height: 4.2rem;
+  padding: 1.2rem;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  cursor: pointer;
+  border: solid 5px var(--bg-color-sec);
+  &:hover,
+  &:active {
+    opacity: 0.85;
+  }
+}
+
+.camera-con {
+  color: var(--text-color);
+  font-size: 2rem;
+}
+
+.fileInput {
+  position: absolute;
+  width: 4.2rem;
+  height: 4.2rem;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.name {
+  font-size: 2.4rem;
+  line-height: 1.5;
+  letter-spacing: 0.75px;
+}
+
+.username {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--label-color);
+  letter-spacing: 0.75px;
+}
+
+.info {
+  margin: 2.4rem 0;
+  & p {
+    line-height: 2;
+    font-size: 1.6rem;
+    letter-spacing: 0.75px;
+    color: var(--text-color);
+  }
+}
