@@ -6,6 +6,7 @@ const {
   findAccount,
   getProfile,
   updateProfile,
+  updateAvt,
 } = require("../services/account.service");
 const bcrypt = require("bcryptjs");
 const jwtConfig = require("../configs/jwt.config");
@@ -149,6 +150,25 @@ exports.putUpdateProfile = async (req, res, next) => {
     return res.status(200).json({ message: "success" });
   } catch (error) {
     console.error("PUT UPDATE PROFILE ERROR: ", error);
+    return res.status(500).json({ message: "Lỗi dịch vụ, thử lại sau" });
+  }
+};
+
+exports.putUpdateAvt = async (req, res, next) => {
+  try {
+    const { user } = req;
+    const { avtSrc } = req.body;
+    if (!Boolean(avtSrc) || !Boolean(user)) {
+      return res.status(400).json({ message: "failed" });
+    }
+    const update = await updateAvt(user.username, avtSrc);
+    if (!update) {
+      return res.status(400).json({ message: "failed" });
+    }
+
+    return res.status(200).json({ newSrc: update });
+  } catch (error) {
+    console.error("PUT UPDATE AVT ERROR: ", error);
     return res.status(500).json({ message: "Lỗi dịch vụ, thử lại sau" });
   }
 };

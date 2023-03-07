@@ -1,6 +1,7 @@
 const { ACCOUNT_TYPES } = require("../constant");
 const AccountModel = require("../models/account.model/account.model");
 const UserModel = require("../models/account.model/user.model");
+const { uploadImage } = require("./common.service");
 
 exports.isExistAccount = async (email) => {
   try {
@@ -76,8 +77,19 @@ exports.updateProfile = async (
       { name: newName, username: newUsername }
     );
 
-    if (isUpdated.n && isUpdated.ok)
-      return { status: true, message: "success" };
+    if (isUpdated) return { status: true, message: "success" };
+
+    return false;
+  } catch (error) {
+    throw error;
+  }
+};
+
+exports.updateAvt = async (username = "", avtSrc = "") => {
+  try {
+    const picture = await uploadImage(avtSrc, "user-avt");
+    const isUpdated = await UserModel.updateOne({ username }, { avt: picture });
+    if (isUpdated) return picture;
 
     return false;
   } catch (error) {

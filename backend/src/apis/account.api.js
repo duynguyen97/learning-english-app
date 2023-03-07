@@ -20,5 +20,10 @@ accountApi.get(
   passportConfig.jwtAuthentication,
   accountController.getUserInfo
 );
+accountApi.put(
+  "/update-avt",
+  passportConfig.jwtAuthentication,
+  accountController.putUpdateAvt
+);
 
 module.exports = accountApi;
