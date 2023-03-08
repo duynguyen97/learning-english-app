@@ -4,6 +4,7 @@ import Loading from 'components/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setMessage } from 'redux/slices/message.slice';
+import { resetAuth } from 'redux/slices/userInfo.slice';
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -20,8 +21,9 @@ const Logout = () => {
       try {
         const apiRes = await accountApi.postLogout();
         if (apiRes.status === 200) {
+          dispatch(resetAuth());
           dispatch(setMessage({ type: 'success', message: 'Đăng xuất thành công' }));
-          navigate('/', { replace: true });
+          navigate('/');
         }
       } catch (error) {
         dispatch(setMessage({ type: 'error', message: 'Đăng xuất thất bại, thử lại' }));
