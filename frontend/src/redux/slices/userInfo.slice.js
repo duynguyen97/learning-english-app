@@ -25,18 +25,18 @@ const userInfoSlice = createSlice({
     loading: true,
   },
   reducers: {
-    setAddFavorites(state, action) {
-      const { word, isAdd = true } = action.payload;
-
-      if (isAdd) {
-        state.favoriteList.push(word);
-      } else {
-        state.favoriteList = state.favoriteList.filter((i) => i !== word);
-      }
-    },
-
     setUserAvt(state, action) {
       state.avt = action.payload;
+    },
+    updateUserInfo(state, action) {
+      state.username = action.payload.username;
+      state.name = action.payload.name;
+    },
+    resetAuth(state) {
+      state.avt = '';
+      state.isAuth = false;
+      state.username = '';
+      state.name = '';
     },
   },
   extraReducers: {
@@ -55,5 +55,5 @@ const userInfoSlice = createSlice({
 });
 
 const { reducer, actions } = userInfoSlice;
-export const { setAddFavorites, setUserAvt } = actions;
+export const { setAddFavorites, setUserAvt, updateUserInfo, resetAuth } = actions;
 export default reducer;

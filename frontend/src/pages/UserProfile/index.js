@@ -8,7 +8,7 @@ import { DEFAULTS, MAX } from 'constant';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMessage } from 'redux/slices/message.slice';
-import { setUserAvt } from 'redux/slices/userInfo.slice';
+import { setUserAvt, updateUserInfo } from 'redux/slices/userInfo.slice';
 import userProfileStyles from './UserProfile.module.scss';
 
 const UserProfile = () => {
@@ -57,6 +57,7 @@ const UserProfile = () => {
     try {
       const apiRes = await accountApi.putUpdateProfile(name, username);
       if (apiRes.status === 200) {
+        dispatch(updateUserInfo({ name, username }));
         dispatch(
           setMessage({
             type: 'success',
