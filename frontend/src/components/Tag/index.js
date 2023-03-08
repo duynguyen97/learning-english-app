@@ -17,7 +17,10 @@ function Tag({ title, iconSrc, id, onChange, resetFlag }) {
   }, [resetFlag]);
 
   return (
-    <div className={`${tagStyles['root']} flex-center--ver cur-pointer ${isActive ? 'active' : ''}`} onClick={onClick}>
+    <div
+      className={`${tagStyles['root']} flex-center--ver cur-pointer ${isActive ? tagStyles['active'] : ''}`}
+      onClick={onClick}
+    >
       {iconSrc && <img className={tagStyles['icon']} src={iconSrc} alt="icon" />}
       <span className={tagStyles['text']}>{title}</span>
     </div>

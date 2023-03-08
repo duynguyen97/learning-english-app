@@ -19,7 +19,6 @@ const TopicSelect = ({ onChange, resetFlag, buttonTitle, topicList, buttonWrappe
     } else {
       topics.current = topics.current.filter((i) => i !== id);
     }
-
     onChange(topics.current);
   };
 

@@ -18,7 +18,7 @@ const FlashCard = () => {
   const [currentList, setCurrentList] = useState([]);
   const [isShowMean, setIsShowMean] = useState(false);
   const [openWordPack, setOpenWordPack] = useState(false);
-  const currentSlide = useRef(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [total, setTotal] = useState(-1);
   const [pageInfo, setPageInfo] = useState({
     page: 1,
@@ -36,18 +36,15 @@ const FlashCard = () => {
     if (total !== -1) {
       return;
     }
-
     async function getFlashcardList() {
       try {
         const apiRes = await wordApi.getWordPack(pageInfo.page, perPage, pageInfo.packInfo);
-
         if (apiRes.status === 200 && isSubscribe) {
           const { data, pagination } = apiRes.data;
-          setCurrentList(data);
-          list.current = [...list.current, ...data];
+          setCurrentList([...data]);
+          if (!pagination?.length) {
+            setTotal(-1);
 
-          const [{ total = 0 }] = pagination;
-          if (total === 0) {
             dispatch(
               setMessage({
                 type: 'warning',
@@ -55,8 +52,10 @@ const FlashCard = () => {
                 duration: 3000,
               }),
             );
+          } else {
+            const [{ total }] = pagination;
+            setTotal(total);
           }
-          setTotal(total);
         }
       } catch (error) {
         setTotal(0);
@@ -70,8 +69,8 @@ const FlashCard = () => {
   const handleNextClick = () => {
     const { page } = pageInfo;
     if (page < total) {
-      if (pageInfo.page < list.current.length / perPage) {
-        const oldList = list.current.slice(page * perPage, (page + 1) * perPage);
+      if (pageInfo.page < currentList.length / perPage) {
+        const oldList = currentList.slice(page * perPage, (page + 1) * perPage);
         setCurrentList(oldList);
       }
       setPageInfo({ ...pageInfo, page: page + 1 });
@@ -81,7 +80,7 @@ const FlashCard = () => {
   const handlePrevClick = () => {
     const { page } = pageInfo;
     if (page > 1) {
-      const oldList = list.current.slice((page - 2) * perPage, (page - 1) * perPage);
+      const oldList = currentList.slice((page - 2) * perPage, (page - 1) * perPage);
       setCurrentList(oldList);
       setPageInfo({ ...pageInfo, page: page - 1 });
     }
@@ -104,7 +103,8 @@ const FlashCard = () => {
     if (isSame) return;
 
     // reset and call API
-    list.current = [];
+    setCurrentList([]);
+    setCurrentSlide(0);
     setPageInfo({
       page: 1,
       packInfo: newPackInfo,
@@ -152,9 +152,9 @@ const FlashCard = () => {
           onGetNewList={handleNextClick}
           onGetOldList={handlePrevClick}
           showMean={isShowMean}
-          currentSlide={currentSlide.current}
-          onSaveCurrentSlide={(v) => (currentSlide.current = v)}
-          totalCurrentSlide={(pageInfo.page - 1) * perPage + currentSlide.current}
+          currentSlide={currentSlide}
+          totalCurrentSlide={(pageInfo.page - 1) * perPage + currentSlide}
+          setCurrent={setCurrentSlide}
         />
       </div>
     </Layout>

@@ -11,6 +11,7 @@ function addAllOption(optionList = []) {
   return [{ value: '-1', label: 'Tất cả' }, ...optionList];
 }
 
+const formId = 'wordPackForm';
 function WordPack(props) {
   const { onChoose, onCancel, open, topicMultiples, title, okBtnText, cancelBtnText, okBtnProps, cancelBtnProps } =
     props;
@@ -23,7 +24,6 @@ function WordPack(props) {
       specialty = target.specialty?.value || '-1',
       topic = target.topic?.value || '-1',
       level = target.level?.value || '-1';
-
     onChoose({
       type,
       specialty,
@@ -33,11 +33,11 @@ function WordPack(props) {
   };
 
   return (
-    <Dialog classes={{ paper: wordPackStyles['dialogPaper'] }} maxWidth="md" fullWidth disableBackdropClick open={open}>
+    <Dialog classes={{ paper: wordPackStyles['dialogPaper'] }} maxWidth="md" fullWidth open={open}>
       <DialogTitle classes={{ root: wordPackStyles['title'] }}>{title}</DialogTitle>
 
       <DialogContent dividers classes={{ dividers: wordPackStyles['breakLine'] }}>
-        <form onSubmit={handleSubmit}>
+        <form id={formId} onSubmit={handleSubmit}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
               <SelectCustom
@@ -98,6 +98,7 @@ function WordPack(props) {
           autoFocus
           disableFocusRipple
           component="button"
+          form={formId}
           type="submit"
           className="_btn _btn-primary"
           variant="contained"

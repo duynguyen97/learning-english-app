@@ -13,30 +13,25 @@ const SlideShow = ({
   onGetOldList,
   showMean,
   currentSlide,
-  onSaveCurrentSlide,
+  setCurrent,
   totalCurrentSlide,
 }) => {
-  const [current, setCurrent] = useState(currentSlide);
-  const count = totalCurrentSlide + current;
+  const count = totalCurrentSlide + currentSlide;
 
   const onPrev = () => {
-    if (current !== 0) {
-      onSaveCurrentSlide(current - 1);
-      setCurrent(current - 1);
+    if (currentSlide !== 0) {
+      setCurrent(currentSlide - 1);
     } else {
-      onSaveCurrentSlide(PAGE_SIZE - 1);
       setCurrent(PAGE_SIZE - 1);
       onGetOldList();
     }
   };
 
   const onNext = () => {
-    if (current < list.length - 1) {
-      onSaveCurrentSlide(current + 1);
-      setCurrent(current + 1);
+    if (currentSlide < list.length - 1) {
+      setCurrent(currentSlide + 1);
     } else {
       onGetNewList();
-      onSaveCurrentSlide(0);
       setCurrent(0);
     }
   };
@@ -45,7 +40,7 @@ const SlideShow = ({
     <div className={`${slideShowStyles['wrapper']} flex-center--ver position-rel`}>
       {list && list.length > 0 ? (
         <>
-          <SlideItem {...list[current]} example={list[current]?.examples[0]} showMean={showMean} />
+          <SlideItem {...list[currentSlide]} example={list[currentSlide]?.examples[0]} showMean={showMean} />
 
           {/* navigation arrow */}
           {count > 0 && (
