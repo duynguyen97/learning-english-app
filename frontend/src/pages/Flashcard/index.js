@@ -4,22 +4,22 @@ import wordApi from 'apis/wordApi';
 import SlideShow from 'components/SlideShow';
 import WordPack from 'components/WordPack';
 import { equalArray } from 'helper';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setMessage } from 'redux/slices/message.slice';
 import flashCardStyles from './Flashcard.module.scss';
 import Layout from 'components/Layout';
-
-const perPage = 10;
+import Loading from 'components/Loading';
+import { PAGE_SIZE } from 'constant';
 
 const FlashCard = () => {
   const dispatch = useDispatch();
-  const list = useRef([]); // list store all item to prevent call API when prev button click
   const [currentList, setCurrentList] = useState([]);
   const [isShowMean, setIsShowMean] = useState(false);
   const [openWordPack, setOpenWordPack] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [total, setTotal] = useState(-1);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(true);
   const [pageInfo, setPageInfo] = useState({
     page: 1,
     packInfo: {
@@ -33,18 +33,15 @@ const FlashCard = () => {
   // get word pack when page change
   useEffect(() => {
     let isSubscribe = true;
-    if (total !== -1) {
-      return;
-    }
+
+    setLoading(true);
     async function getFlashcardList() {
       try {
-        const apiRes = await wordApi.getWordPack(pageInfo.page, perPage, pageInfo.packInfo);
+        const apiRes = await wordApi.getWordPack(pageInfo.page, PAGE_SIZE, pageInfo.packInfo);
         if (apiRes.status === 200 && isSubscribe) {
           const { data, pagination } = apiRes.data;
           setCurrentList([...data]);
           if (!pagination?.length) {
-            setTotal(-1);
-
             dispatch(
               setMessage({
                 type: 'warning',
@@ -57,8 +54,10 @@ const FlashCard = () => {
             setTotal(total);
           }
         }
+        setLoading(false);
       } catch (error) {
         setTotal(0);
+        setLoading(false);
       }
     }
 
@@ -68,11 +67,7 @@ const FlashCard = () => {
 
   const handleNextClick = () => {
     const { page } = pageInfo;
-    if (page < total) {
-      if (pageInfo.page < currentList.length / perPage) {
-        const oldList = currentList.slice(page * perPage, (page + 1) * perPage);
-        setCurrentList(oldList);
-      }
+    if (page < Math.ceil(total / PAGE_SIZE)) {
       setPageInfo({ ...pageInfo, page: page + 1 });
     }
   };
@@ -80,8 +75,6 @@ const FlashCard = () => {
   const handlePrevClick = () => {
     const { page } = pageInfo;
     if (page > 1) {
-      const oldList = currentList.slice((page - 2) * perPage, (page - 1) * perPage);
-      setCurrentList(oldList);
       setPageInfo({ ...pageInfo, page: page - 1 });
     }
   };
@@ -109,7 +102,6 @@ const FlashCard = () => {
       page: 1,
       packInfo: newPackInfo,
     });
-    setTotal(-1);
   };
 
   return (
@@ -146,16 +138,20 @@ const FlashCard = () => {
           />
         )}
 
-        <SlideShow
-          list={currentList}
-          total={total}
-          onGetNewList={handleNextClick}
-          onGetOldList={handlePrevClick}
-          showMean={isShowMean}
-          currentSlide={currentSlide}
-          totalCurrentSlide={(pageInfo.page - 1) * perPage + currentSlide}
-          setCurrent={setCurrentSlide}
-        />
+        {loading ? (
+          <Loading />
+        ) : (
+          <SlideShow
+            list={currentList}
+            total={total}
+            onGetNewList={handleNextClick}
+            onGetOldList={handlePrevClick}
+            showMean={isShowMean}
+            currentSlide={currentSlide}
+            totalCurrentSlide={(pageInfo.page - 1) * PAGE_SIZE + currentSlide}
+            setCurrent={setCurrentSlide}
+          />
+        )}
       </div>
     </Layout>
   );

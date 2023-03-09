@@ -35,6 +35,8 @@ export const REGEX = {
   NAME: /^[^\d~`!@#$%^&*\(\)\\\|\.,\?\/\-\+\=\_]+$/gi,
 };
 
+export const PAGE_SIZE = 100;
+
 export const WORD_TYPES = [
   {
     value: 'n',

@@ -1,10 +1,9 @@
 import { Skeleton, Tooltip } from '@mui/material';
+import { PAGE_SIZE } from 'constant';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import SlideItem from './SlideItem';
 import slideShowStyles from './slideShow.module.scss';
-
-const PAGE_SIZE = 10;
 
 const SlideShow = ({
   list,
@@ -16,8 +15,7 @@ const SlideShow = ({
   setCurrent,
   totalCurrentSlide,
 }) => {
-  const count = totalCurrentSlide + currentSlide;
-
+  const count = totalCurrentSlide;
   const onPrev = () => {
     if (currentSlide !== 0) {
       setCurrent(currentSlide - 1);
